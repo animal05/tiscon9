@@ -13,6 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDate;
+import java.time.Month;
 
 /**
  * 引越し見積もり機能において業務処理を担当するクラス。
@@ -72,10 +74,33 @@ public class EstimateService {
     public Integer getPrice(UserOrderDto dto) {
         double distance = estimateDAO.getDistance(dto.getOldPrefectureId(), dto.getNewPrefectureId());
         // 小数点以下を切り捨てる
-        int distanceInt = (int) Math.floor(distance);
+        // int distanceInt = (int) Math.floor(distance);
 
         // 距離当たりの料金を算出する
-        int priceForDistance = distanceInt * PRICE_PER_DISTANCE;
+        double priceForDistance = distance * PRICE_PER_DISTANCE;
+        // dto.getMoveDate()
+        // 季節係数を算出する
+        // 日付を取得
+        LocalDate date = LocalDate.parse(dto.getDate());
+        // 月を取得
+        Month month = date.getMonth();
+        // 季節係数の定義
+        double seasonalCoefficient = 1.0; // デフォルトの係数
+        // 月によって係数を調整
+        switch (month) {
+            case JANUARY:
+            case FEBRUARY:
+            case MARCH:
+                seasonalCoefficient = 1.5;
+                break;
+            case SEPTEMBER:
+                seasonalCoefficient = 1.2;
+                break;
+            default:
+                break;
+        }
+        int priceForDistanceWithSeason = (int) Math.floor(priceForDistance * seasonalCoefficient);
+
 
         int boxes = getBoxForPackage(dto.getBox(), PackageType.BOX)
                 + getBoxForPackage(dto.getBed(), PackageType.BED)
@@ -92,7 +117,7 @@ public class EstimateService {
             priceForOptionalService = estimateDAO.getPricePerOptionalService(OptionalServiceType.WASHING_MACHINE.getCode());
         }
 
-        return priceForDistance + pricePerTruck + priceForOptionalService;
+        return priceForDistanceWithSeason + pricePerTruck + priceForOptionalService;
     }
 
     /**
