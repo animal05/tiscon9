@@ -38,6 +38,13 @@
           <label for="email">連絡先メールアドレス</label>
           <input type="email" id="email" name="email" th:field="*{email}" class="form-control" value="test@test.com" required/>
         </div>
+
+        <div class = "sub-title"> 引っ越し日</div>
+        <div class = "form-group">
+          <label for="date"> 引っ越し日</label>
+          <input type="date" id="date" name="date" th:field="*{date}" class="form-control" required/>
+        </div>
+
         <div class="sub-title">集荷元・お届け先</div>
         <div class="form-group">
           <label for="oldPrefectureId">集荷元住所（都道府県）</label>
