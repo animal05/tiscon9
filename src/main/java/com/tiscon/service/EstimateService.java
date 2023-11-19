@@ -78,7 +78,6 @@ public class EstimateService {
 
         // 距離当たりの料金を算出する
         double priceForDistance = distance * PRICE_PER_DISTANCE;
-        // dto.getMoveDate()
         // 季節係数を算出する
         // 日付を取得
         LocalDate date = LocalDate.parse(dto.getDate());
@@ -88,9 +87,8 @@ public class EstimateService {
         double seasonalCoefficient = 1.0; // デフォルトの係数
         // 月によって係数を調整
         switch (month) {
-            case JANUARY:
-            case FEBRUARY:
             case MARCH:
+            case APRIL:
                 seasonalCoefficient = 1.5;
                 break;
             case SEPTEMBER:
