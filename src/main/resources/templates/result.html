@@ -48,19 +48,21 @@
 
         
     
-    <div class="col-sm-12">
+    
       <div class="sub-title">引っ越し日</div>
       <table class="table table-bordered">
         <col span="1" style="background-color: #FFFFFF;">
         <col span="2" style="background-color: #FFFFFF;">
         <tbody>
         <tr>
-          <th>引っ越し日</th>
+          <th style="width: 40%">引っ越し日</th>
           <td><span th:text="*{date}"></span></td>
           <input type="hidden" name="date" id="date" th:value="*{date}"/>
         </tr>
+        </tbody>
       </table>
-    </div>
+    
+
       <div class="sub-title">集荷元・お届け先</div>
       <table class="table table-bordered">
         <col span="1" style="background-color: #FFFFFF;">
