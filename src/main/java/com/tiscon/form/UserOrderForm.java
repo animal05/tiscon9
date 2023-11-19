@@ -2,6 +2,7 @@ package com.tiscon.form;
 
 import com.tiscon.validator.Numeric;
 
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -23,6 +24,10 @@ public class UserOrderForm {
     @Email
     @NotBlank
     private String email;
+
+    /* */
+    @NotBlank
+    private String date;
 
     @NotBlank
     private String oldPrefectureId;
@@ -77,6 +82,14 @@ public class UserOrderForm {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getOldPrefectureId() {

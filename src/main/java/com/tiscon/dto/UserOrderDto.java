@@ -1,5 +1,6 @@
 package com.tiscon.dto;
 
+
 public class UserOrderDto {
 
     private String customerName;
@@ -7,6 +8,8 @@ public class UserOrderDto {
     private String tel;
 
     private String email;
+    
+    private String date; 
 
     private String oldPrefectureId;
 
@@ -49,6 +52,15 @@ public class UserOrderDto {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
 
     public String getOldPrefectureId() {
         return oldPrefectureId;
